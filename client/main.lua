@@ -2,21 +2,21 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 
 local headerShown = false
 local sendData = nil
-
 -- Functions
+
 local function openMenu(data)
     if not data or not next(data) then return end
-	for _,v in pairs(data) do
-		if v["icon"] then
-			local img = "rsg-inventory/html/"
-			if RSGCore.Shared.Items[tostring(v["icon"])] then
-				if not string.find(RSGCore.Shared.Items[tostring(v["icon"])].image, "images/") then
-					img = img.."images/"
-				end
-				v["icon"] = img..RSGCore.Shared.Items[tostring(v["icon"])].image
-			end
-		end
-	end
+    for _,v in pairs(data) do
+        if v["icon"] then
+            local img = "rsg-inventory/html/"
+            if RSGCore.Shared.Items[tostring(v["icon"])] then
+                if not string.find(RSGCore.Shared.Items[tostring(v["icon"])].image, "images/") then
+                    img = img.."images/"
+                end
+                v["icon"] = img..RSGCore.Shared.Items[tostring(v["icon"])].image
+            end
+        end
+    end
     SetNuiFocus(true, true)
     headerShown = false
     sendData = data
@@ -57,9 +57,9 @@ end)
 
 -- NUI Callbacks
 
-RegisterNUICallback('clickedButton', function(option, cb)
+RegisterNUICallback('clickedButton', function(option)
     if headerShown then headerShown = false end
-    PlaySoundFrontend(-1, 'Highlight_Cancel', 'DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
+    PlaySoundFrontend("SELECT", "RDRO_Character_Creator_Sounds", true, 0)
     SetNuiFocus(false)
     if sendData then
         local data = sendData[tonumber(option)]
@@ -80,26 +80,23 @@ RegisterNUICallback('clickedButton', function(option, cb)
             end
         end
     end
-    cb('ok')
 end)
 
-RegisterNUICallback('closeMenu', function(_, cb)
+RegisterNUICallback('closeMenu', function()
     headerShown = false
     sendData = nil
     SetNuiFocus(false)
-    cb('ok')
-    TriggerEvent("rsg-menu:client:menuClosed")
 end)
 
 -- Command and Keymapping
 
-RegisterCommand('playerfocus', function()
+RegisterCommand('+playerfocus', function()
     if headerShown then
         SetNuiFocus(true, true)
     end
 end)
 
-RegisterKeyMapping('playerFocus', 'Give Menu Focus', 'keyboard', 'LMENU')
+RegisterKeyMapping('+playerFocus', 'Give Menu Focus', 'keyboard', 'LMENU')
 
 -- Exports
 
