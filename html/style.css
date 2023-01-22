@@ -22,7 +22,7 @@
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #1f2331f2;
-    border-radius: 10px;
+    border-radius: 13px;
 }
 
 #container {
@@ -30,7 +30,7 @@
     height: auto;
     top: 20%;
     right: 20%;
-    border-radius: 2px;
+    border-radius: 5px;
     background: transparent !important;
 }
 .button {
@@ -47,8 +47,8 @@
 }
 
 #buttons {
-    max-height: 120vh;
-    width: 225px;
+    max-height: 75vh;
+    width: 300px;
     overflow-x: none;
     overflow-y: auto;
     padding: 10px;
@@ -132,7 +132,7 @@ div > .header {
     overflow: wrap;
 	color: rgb(239, 228, 205);
     text-shadow:2px 2px 4px #000000;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: 400;
     overflow: hidden;
 }
